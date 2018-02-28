@@ -28,6 +28,8 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.example.sangameswaran.sevagan.BackgroundServices.RequestService;
 import com.example.sangameswaran.sevagan.Constants.CommonFunctions;
+import com.example.sangameswaran.sevagan.Entities.LocationEntity;
+import com.example.sangameswaran.sevagan.Entities.LocationResponseEntity;
 import com.example.sangameswaran.sevagan.Entities.RequestEntity;
 import com.example.sangameswaran.sevagan.Entities.RequestMiniEntity;
 import com.example.sangameswaran.sevagan.RestCalls.RestClientImplementation;
@@ -112,7 +114,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Intent intent = new Intent(MainActivity.this, RequestService.class);
                 startService(intent);
                 RequestMiniEntity entity = new RequestMiniEntity();
-                entity.setPhone(contactNumber);
                 entity.setPatientName(patientName);
                 entity.setLocation(fallbackLocation);
                 entity.setUnitsrequired(unitsRequired);
@@ -120,9 +121,33 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 entity.setLongitude(requestLocation.longitude);
                 entity.setBloodgroup(bloodGroup);
                 entity.setCasetype(pace);
-                RequestEntity entity1 = new RequestEntity(entity);
+                entity.setSevaganId("DO-1GGQCGPFUJ");
+                int i=distanceSelectionSpinner.getSelectedItemPosition();
+                int th;
+                if(i==0){
+                    th=5000;
+                }else if(i==1){
+                    th=10000;
+                }else if(i==2){
+                    th = 15000;
+                }else{
+                    th= 20000;
+                }
+                RequestEntity entity1 = new RequestEntity(entity,contactNumber,th+"");
                 //use entity1 as post @param
-
+                RestClientImplementation.postBloodRequestApi(entity1, new RequestEntity.SevaganRestClientInterface() {
+                    @Override
+                    public void onRaiseRequest(LocationResponseEntity entity, VolleyError error) {
+                        if(error ==null){
+                            map.clear();
+                            map.addMarker(new MarkerOptions().position(requestLocation).title("Your position"));
+                            MoveAndAnimateCamera(requestLocation,12);
+                            for(LocationEntity en:entity.getResponse()){
+                                map.addMarker(new MarkerOptions().position(new LatLng(en.getLatitude(),en.getLongitude())).title(en.getName()));
+                            }
+                        }
+                    }
+                },MainActivity.this);
             }
         });
     }

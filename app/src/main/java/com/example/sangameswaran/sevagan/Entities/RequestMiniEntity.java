@@ -5,7 +5,7 @@ package com.example.sangameswaran.sevagan.Entities;
  */
 
 public class RequestMiniEntity {
-    String patientName,unitsrequired,location,phone;
+    String patientname,unitrequired,location,sevaganId;
     int casetype,bloodgroup;
     double latitude,longitude;
 
@@ -16,34 +16,41 @@ public class RequestMiniEntity {
         return bloodgroup;
     }
 
+    public String getSevaganId() {
+        return sevaganId;
+    }
+
+    public void setSevaganId(String sevaganId) {
+        this.sevaganId = sevaganId;
+    }
+
     public void setBloodgroup(int bloodgroup) {
         this.bloodgroup = bloodgroup;
     }
 
     public RequestMiniEntity(String patientName, String unitsrequired, String location, String phone, int casetype, double latitude, double longitude) {
-        this.patientName = patientName;
-        this.unitsrequired = unitsrequired;
+        this.patientname = patientName;
+        this.unitrequired = unitsrequired;
         this.location = location;
-        this.phone = phone;
         this.casetype = casetype;
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
     public String getPatientName() {
-        return patientName;
+        return patientname;
     }
 
     public void setPatientName(String patientName) {
-        this.patientName = patientName;
+        this.patientname = patientName;
     }
 
     public String getUnitsrequired() {
-        return unitsrequired;
+        return unitrequired;
     }
 
     public void setUnitsrequired(String unitsrequired) {
-        this.unitsrequired = unitsrequired;
+        this.unitrequired = unitsrequired;
     }
 
     public String getLocation() {
@@ -52,14 +59,6 @@ public class RequestMiniEntity {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public int getCasetype() {

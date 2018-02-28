@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.karumi.dexter.Dexter;
@@ -26,11 +28,28 @@ import java.util.List;
 
 public class SplashScreenActivity extends AppCompatActivity {
     AlertDialog.Builder permissionChecker;
+    RelativeLayout drf,rbf;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        rbf=(RelativeLayout) findViewById(R.id.rbf);
+        drf=(RelativeLayout) findViewById(R.id.drf);
         askRequiredPermissionsForApplication();
+        rbf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Intent intent = new Intent(SplashScreenActivity.this,RequestActivity.class);
+                startActivity(intent);
+            }
+        });
+        drf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SplashScreenActivity.this,RegistrationActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     public boolean askRequiredPermissionsForApplication()
     {
@@ -38,8 +57,8 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void onPermissionsChecked(MultiplePermissionsReport report) {
                 if(report.areAllPermissionsGranted()){
-                    Intent intent = new Intent(SplashScreenActivity.this,RequestActivity.class);
-                    startActivity(intent);
+                    /*Intent intent = new Intent(SplashScreenActivity.this,RequestActivity.class);
+                    startActivity(intent);*/
                 }
                 else {
                     permissionChecker=new AlertDialog.Builder(SplashScreenActivity.this);

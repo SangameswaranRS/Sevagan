@@ -8,9 +8,29 @@ import com.android.volley.VolleyError;
 
 public class RequestEntity {
     RequestMiniEntity request;
+    String phone;
+    String threshold;
 
-    public RequestEntity(RequestMiniEntity request) {
+    public RequestEntity(RequestMiniEntity request,String phone,String threshold) {
         this.request = request;
+        this.phone=phone;
+        this.threshold=threshold;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getThreshold() {
+        return threshold;
+    }
+
+    public void setThreshold(String threshold) {
+        this.threshold = threshold;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public RequestMiniEntity getRequest() {
@@ -22,6 +42,6 @@ public class RequestEntity {
     }
 
     public interface SevaganRestClientInterface{
-        public void onRaiseRequest(VolleyError error);
+        public void onRaiseRequest(LocationResponseEntity entity,VolleyError error);
     }
 }
