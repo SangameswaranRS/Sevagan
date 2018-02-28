@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etName"
+            android:layout_marginTop="10dp"
+            android:hint="Enter Name"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:id="@+id/etAge"
+            android:hint="Enter Age"
+            android:inputType="number"/>
+        <EditText
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etWeight"
+            android:hint="Enter Weight"
+            android:inputType="number"/>
+        <EditText
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etEmailId"
+            android:hint="Enter Email id"
+            />
+        <EditText
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etPassword"
+            android:hint="Enter password"/>
+        <EditText
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etLocationString"
+            android:hint="Enter Fallback location"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etPhone"
+            android:hint="Phone Number"
+            android:inputType="number"/>
+        <Spinner
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bloodGroupSpinner">
+        </Spinner>
+        <Spinner
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/PreferencePeriodSpinner">
+        </Spinner>
+        <Spinner
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/genderSelectionSpinner">
+        </Spinner>
+        <EditText
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etAddressString"
+            android:hint="Enter Address string"/>
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:id="@+id/btnRegister"
+            android:background="@color/colorPrimary"
+            android:textColor="#fff"/>
+
+    </LinearLayout>
+
+</ScrollView>

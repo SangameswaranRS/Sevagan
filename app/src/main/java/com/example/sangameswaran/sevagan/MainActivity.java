@@ -30,6 +30,7 @@ import com.example.sangameswaran.sevagan.Constants.CommonFunctions;
 import com.example.sangameswaran.sevagan.RestCalls.RestClientImplementation;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -120,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     map.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("My Location"));
                     requestLocation = new LatLng(location.getLatitude(), location.getLongitude());
                     drawCircle(requestLocation,800);
+                    MoveAndAnimateCamera(requestLocation,15);
                 }
             }
         });
@@ -132,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             map.addMarker(new MarkerOptions().title("Request Location").position(latLng)).showInfoWindow();
             requestLocation = latLng;
             drawCircle(requestLocation,800);
+            MoveAndAnimateCamera(requestLocation,15);
         }
     }
 
@@ -183,5 +186,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         circleOptions.strokeWidth(2);
         map.addCircle(circleOptions);
 
+    }
+
+    public void MoveAndAnimateCamera(LatLng place,int ZoomLevel) {
+        if(map!=null){
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(place, ZoomLevel-1));
+            map.animateCamera(CameraUpdateFactory.zoomTo(ZoomLevel), 2000, null);
+        }
     }
 }
