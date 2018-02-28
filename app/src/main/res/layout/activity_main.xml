@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.sangameswaran.sevagan.MainActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/colorPrimary"
+        android:id="@+id/headerRl">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nearby donors.."
+            android:textColor="#fff"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
 
     <fragment
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,6 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/map"
+        android:layout_below="@+id/headerRl"
         map:uiZoomControls="true"
         android:layout_above="@+id/containerLL"
         tools:context=".MapsActivity"

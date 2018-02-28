@@ -26,15 +26,14 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".SplashScreenActivity">
-7
-        </activity>
-        <activity android:name=".RegistrationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".RegistrationActivity"></activity>
+        <activity android:name=".RequestActivity"></activity>
         <service android:name="com.example.sangameswaran.sevagan.BackgroundServices.RequestService"></service>
 
     </application>

@@ -15,6 +15,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,6 +28,8 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.example.sangameswaran.sevagan.BackgroundServices.RequestService;
 import com.example.sangameswaran.sevagan.Constants.CommonFunctions;
+import com.example.sangameswaran.sevagan.Entities.RequestEntity;
+import com.example.sangameswaran.sevagan.Entities.RequestMiniEntity;
 import com.example.sangameswaran.sevagan.RestCalls.RestClientImplementation;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -50,6 +53,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FusedLocationProviderClient mFusedLocationClient;
     AlertDialog locationAlert;
     boolean locationPreferenceFlag = false;
+    String patientName;
+    String unitsRequired;
+    String fallbackLocation;
+    String contactNumber;
+    int pace;
+    int bloodGroup;
     AlertDialog.Builder locationAlertBuilder;
     RadioGroup locationPreferenceSelector;
     LatLng requestLocation;
@@ -66,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         showLocationAlert();
         searchRadius = new ArrayList<>();
         initSearchRadius();
+        getValuesViaIntent();
         distanceSelectionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -101,6 +111,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 CommonFunctions.toastString("Requesting Donors at the selected Range",MainActivity.this);
                 Intent intent = new Intent(MainActivity.this, RequestService.class);
                 startService(intent);
+                RequestMiniEntity entity = new RequestMiniEntity();
+                entity.setPhone(contactNumber);
+                entity.setPatientName(patientName);
+                entity.setLocation(fallbackLocation);
+                entity.setUnitsrequired(unitsRequired);
+                entity.setLatitude(requestLocation.latitude);
+                entity.setLongitude(requestLocation.longitude);
+                entity.setBloodgroup(bloodGroup);
+                entity.setCasetype(pace);
+                RequestEntity entity1 = new RequestEntity(entity);
+                //use entity1 as post @param
+
             }
         });
     }
@@ -193,5 +215,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(place, ZoomLevel-1));
             map.animateCamera(CameraUpdateFactory.zoomTo(ZoomLevel), 2000, null);
         }
+    }
+
+    public void getValuesViaIntent(){
+        Intent intent = getIntent();
+        patientName = intent.getStringExtra("patientName");
+        unitsRequired= intent.getStringExtra("unitsRequired");
+        fallbackLocation=intent.getStringExtra("fallbackLocation");
+        bloodGroup=intent.getIntExtra("bloodGroup",0);
+        contactNumber=intent.getStringExtra("contactNumber");
+        pace = intent.getIntExtra("pace",0);
     }
 }
