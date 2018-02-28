@@ -28,13 +28,14 @@ import java.util.List;
 
 public class SplashScreenActivity extends AppCompatActivity {
     AlertDialog.Builder permissionChecker;
-    RelativeLayout drf,rbf;
+    RelativeLayout drf,rbf,fsf;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         rbf=(RelativeLayout) findViewById(R.id.rbf);
         drf=(RelativeLayout) findViewById(R.id.drf);
+        fsf=(RelativeLayout) findViewById(R.id.fsf);
         askRequiredPermissionsForApplication();
         rbf.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +48,13 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SplashScreenActivity.this,RegistrationActivity.class);
+                startActivity(intent);
+            }
+        });
+        fsf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SplashScreenActivity.this,FoodAvailableActivity.class);
                 startActivity(intent);
             }
         });
