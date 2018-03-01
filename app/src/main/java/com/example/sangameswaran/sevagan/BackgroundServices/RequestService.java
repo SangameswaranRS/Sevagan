@@ -22,7 +22,7 @@ public class RequestService extends Service{
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        CommonFunctions.toastString("Service Started",this);
+        //CommonFunctions.toastString("Service Started",this);
         return super.onStartCommand(intent, flags, startId);
     }
 

@@ -2,6 +2,7 @@ package com.example.sangameswaran.sevagan.RestCalls;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -12,6 +13,7 @@ import com.example.sangameswaran.sevagan.Constants.CommonFunctions;
 import com.example.sangameswaran.sevagan.Constants.Constants;
 import com.example.sangameswaran.sevagan.Entities.DonorRegistrationActualEntity;
 import com.example.sangameswaran.sevagan.Entities.DonorRegistrationEntity;
+import com.example.sangameswaran.sevagan.Entities.FoodLocationApiEntity;
 import com.example.sangameswaran.sevagan.Entities.LocationResponseEntity;
 import com.example.sangameswaran.sevagan.Entities.RequestEntity;
 import com.google.gson.Gson;
@@ -86,6 +88,25 @@ public class RestClientImplementation {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void getFoodPointsApi(final FoodLocationApiEntity entity,final FoodLocationApiEntity.SevaganRestClientInterface restClientInterface,final Context context){
+        String API_URL="http://192.168.137.230:1111/user/get/food";
+        queue = VolleySingleton.getInstance(context).getRequestQueue();
+        final Gson gson=new Gson();
+        JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET, API_URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                FoodLocationApiEntity entity1=gson.fromJson(response.toString(),FoodLocationApiEntity.class);
+                restClientInterface.onGetFoodLocation(entity1,null);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                CommonFunctions.toastString("Something Went wrong!",context);
+            }
+        });
+        queue.add(getRequest);
     }
 
 
