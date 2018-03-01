@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     RadioGroup locationPreferenceSelector;
     LatLng requestLocation;
     List<String> searchRadius;
+    int flag=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     public void onRaiseRequest(LocationResponseEntity entity, VolleyError error) {
                         if(error ==null){
                             map.clear();
+                            flag=1;
                             map.addMarker(new MarkerOptions().position(requestLocation).title("Your position"));
                             MoveAndAnimateCamera(requestLocation,12);
                             for(LocationEntity en:entity.getResponse()){
@@ -147,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             }
                         }
                     }
-                },MainActivity.this);
+                },MainActivity.this,flag);
             }
         });
     }

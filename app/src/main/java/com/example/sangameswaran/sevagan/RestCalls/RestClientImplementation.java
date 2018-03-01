@@ -55,8 +55,11 @@ public class RestClientImplementation {
         }
     }
 
-    public static void postBloodRequestApi(final RequestEntity entity, final RequestEntity.SevaganRestClientInterface restClientInterface, final Context context){
+    public static void postBloodRequestApi(final RequestEntity entity, final RequestEntity.SevaganRestClientInterface restClientInterface, final Context context,int flag){
         String API_URL="http://192.168.137.230:1111/user/donor/request";
+        if(flag ==1){
+            API_URL="http://192.168.137.230:1111/user/donor/request";
+        }
         queue = VolleySingleton.getInstance(context).getRequestQueue();
         final Gson gson=new Gson();
         String jsonString = gson.toJson(entity);
